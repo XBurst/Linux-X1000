@@ -22,9 +22,9 @@
 #include <linux/clockchips.h>
 #include <linux/sched_clock.h>
 
-#include <asm/mach-jz4740/clock.h>
-#include <asm/mach-jz4740/irq.h>
-#include <asm/mach-jz4740/timer.h>
+#include <asm/ingenic/clock.h>
+#include <asm/ingenic/irq.h>
+#include <asm/ingenic/timer.h>
 #include <asm/time.h>
 
 #include "clock.h"
@@ -113,7 +113,7 @@ static struct clock_event_device jz4740_clockevent = {
 #ifdef CONFIG_MACH_JZ4740
 	.irq = JZ4740_IRQ_TCU0,
 #endif
-#if defined(CONFIG_MACH_JZ4770) || defined(CONFIG_MACH_JZ4780)
+#if defined(CONFIG_MACH_JZ4770) || defined(CONFIG_MACH_JZ4780) || defined(CONFIG_MACH_X1000)
 	.irq = JZ4780_IRQ_TCU2,
 #endif
 };

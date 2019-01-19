@@ -23,9 +23,9 @@
 
 #include <linux/usb/musb.h>
 
-#include <asm/mach-jz4740/platform.h>
-#include <asm/mach-jz4740/base.h>
-#include <asm/mach-jz4740/irq.h>
+#include <asm/ingenic/platform.h>
+#include <asm/ingenic/base.h>
+#include <asm/ingenic/irq.h>
 
 #include <linux/serial_core.h>
 #include <linux/serial_8250.h>

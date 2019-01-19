@@ -18,8 +18,8 @@
 #include <linux/init.h>
 #include <linux/kernel.h>
 
-#include <asm/mach-jz4740/base.h>
-#include <asm/mach-jz4740/timer.h>
+#include <asm/ingenic/base.h>
+#include <asm/ingenic/timer.h>
 
 void __iomem *jz4740_timer_base;
 EXPORT_SYMBOL_GPL(jz4740_timer_base);

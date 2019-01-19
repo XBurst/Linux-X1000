@@ -19,7 +19,7 @@
 #include <linux/delay.h>
 #include <linux/of.h>
 #include <dt-bindings/clock/jz4740-cgu.h>
-#include <asm/mach-jz4740/clock.h>
+#include <asm/ingenic/clock.h>
 #include "cgu.h"
 
 /* CGU register offsets */

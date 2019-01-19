@@ -27,7 +27,7 @@
 
 #include <linux/dma-mapping.h>
 
-#include <asm/mach-jz4740/jz4740_fb.h>
+#include <asm/ingenic/jz4740_fb.h>
 
 #define JZ_REG_LCD_CFG		0x00
 #define JZ_REG_LCD_VSYNC	0x04

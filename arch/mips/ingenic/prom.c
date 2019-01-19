@@ -21,7 +21,7 @@
 
 #include <asm/bootinfo.h>
 #include <asm/fw/fw.h>
-#include <asm/mach-jz4740/base.h>
+#include <asm/ingenic/base.h>
 
 void __init prom_init(void)
 {

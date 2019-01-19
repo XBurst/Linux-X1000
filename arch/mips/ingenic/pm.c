@@ -18,7 +18,7 @@
 #include <linux/delay.h>
 #include <linux/suspend.h>
 
-#include <asm/mach-jz4740/clock.h>
+#include <asm/ingenic/clock.h>
 
 static int jz4740_pm_enter(suspend_state_t state)
 {

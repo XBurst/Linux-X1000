@@ -31,14 +31,14 @@
 
 #include <linux/platform_data/jz4740/jz4740_nand.h>
 
-#include <asm/mach-jz4740/gpio.h>
-#include <asm/mach-jz4740/jz4740_fb.h>
-#include <asm/mach-jz4740/jz4740_mmc.h>
+#include <asm/ingenic/gpio.h>
+#include <asm/ingenic/jz4740_fb.h>
+#include <asm/ingenic/jz4740_mmc.h>
 
 #include <linux/regulator/fixed.h>
 #include <linux/regulator/machine.h>
 
-#include <asm/mach-jz4740/platform.h>
+#include <asm/ingenic/platform.h>
 
 #include "clock.h"
 

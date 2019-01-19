@@ -35,8 +35,8 @@
 
 #include <asm/cacheflush.h>
 
-#include <asm/mach-jz4740/dma.h>
-#include <asm/mach-jz4740/jz4740_mmc.h>
+#include <asm/ingenic/dma.h>
+#include <asm/ingenic/jz4740_mmc.h>
 
 #define JZ_REG_MMC_STRPCL	0x00
 #define JZ_REG_MMC_STATUS	0x04
@@ -117,6 +117,7 @@ enum jz4740_mmc_version {
 	JZ_MMC_JZ4740,
 	JZ_MMC_JZ4725B,
 	JZ_MMC_JZ4780,
+	JZ_MMC_X1000,
 };
 
 enum jz4740_mmc_state {
@@ -972,6 +973,7 @@ static const struct of_device_id jz4740_mmc_of_match[] = {
 	{ .compatible = "ingenic,jz4740-mmc", .data = (void *) JZ_MMC_JZ4740 },
 	{ .compatible = "ingenic,jz4725b-mmc", .data = (void *)JZ_MMC_JZ4725B },
 	{ .compatible = "ingenic,jz4780-mmc", .data = (void *) JZ_MMC_JZ4780 },
+	{ .compatible = "ingenic,x1000-mmc", .data = (void *) JZ_MMC_X1000 },
 	{},
 };
 MODULE_DEVICE_TABLE(of, jz4740_mmc_of_match);
