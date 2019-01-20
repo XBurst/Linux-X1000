@@ -609,7 +609,7 @@ void build_tlb_write_entry(u32 **p, struct uasm_label **l,
 		tlbw(p);
 		break;
 
-	case CPU_JZRISC:
+	case CPU_XBURST:
 		tlbw(p);
 		uasm_i_nop(p);
 		break;

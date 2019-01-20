@@ -5,11 +5,23 @@
 / {//
 	#address-cells = <1>;//
 	#size-cells = <1>;//
-	compatible = "ingenic,x1000";//
+	compatible = "ingenic,x1000", "ingenic,x1500";//
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu0: cpu@0 {
+			compatible = "ingenic,xburst";
+			device_type = "cpu";
+			reg = <0>;
+		};
+	};
 
 	cpuintc: interrupt-controller {//
 		#address-cells = <0>;//
 		#interrupt-cells = <1>;//
+
 		interrupt-controller;//
 		compatible = "mti,cpu-interrupt-controller";//
 	};//

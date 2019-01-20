@@ -55,6 +55,7 @@
 enum jz4740_rtc_type {
 	ID_JZ4740,
 	ID_JZ4780,
+	ID_X1000,
 };
 
 struct jz4740_rtc {
@@ -301,6 +302,7 @@ static void jz4740_rtc_power_off(void)
 static const struct of_device_id jz4740_rtc_of_match[] = {
 	{ .compatible = "ingenic,jz4740-rtc", .data = (void *)ID_JZ4740 },
 	{ .compatible = "ingenic,jz4780-rtc", .data = (void *)ID_JZ4780 },
+	{ .compatible = "ingenic,x1000-rtc", .data = (void *)ID_X1000 },
 	{},
 };
 MODULE_DEVICE_TABLE(of, jz4740_rtc_of_match);
@@ -429,6 +431,7 @@ static const struct dev_pm_ops jz4740_pm_ops = {
 static const struct platform_device_id jz4740_rtc_ids[] = {
 	{ "jz4740-rtc", ID_JZ4740 },
 	{ "jz4780-rtc", ID_JZ4780 },
+	{ "x1000-rtc", ID_X1000 },
 	{}
 };
 MODULE_DEVICE_TABLE(platform, jz4740_rtc_ids);
