@@ -756,19 +756,26 @@ int ingenic_cgu_register_clocks(struct ingenic_cgu *cgu)
 				   GFP_KERNEL);
 	if (!cgu->clocks.clks) {
 		err = -ENOMEM;
+		pr_err("------1------\n");
 		goto err_out;
 	}
 
 	for (i = 0; i < cgu->clocks.clk_num; i++) {
 		err = ingenic_register_clock(cgu, i);
 		if (err)
+{
+		pr_err("------2------\n");
 			goto err_out_unregister;
+}
 	}
 
 	err = of_clk_add_provider(cgu->np, of_clk_src_onecell_get,
 				  &cgu->clocks);
 	if (err)
+{
+		pr_err("------3------\n");
 		goto err_out_unregister;
+}
 
 	return 0;
 

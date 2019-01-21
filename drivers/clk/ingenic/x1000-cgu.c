@@ -199,7 +199,7 @@ static const struct ingenic_cgu_clk_info x1000_cgu_clocks[] = {//
 		.div = { CGU_REG_CPCCR, 16, 1, 4, 20, -1, -1 },//
 	},//
 
-	[X1000_CLK_DDR] = {//
+	[X1000_CLK_DDR] = {//12
 		"ddr", CGU_CLK_MUX | CGU_CLK_DIV | CGU_CLK_GATE,//
 		.parents = { -1, X1000_CLK_SCLKA, X1000_CLK_MPLL, -1 },//
 		.mux = { CGU_REG_DDRCDR, 30, 2 },//
@@ -229,19 +229,19 @@ static const struct ingenic_cgu_clk_info x1000_cgu_clocks[] = {//
 
 	/* Gate-only clocks */
 
-	[X1000_CLK_UART0] = {//
+	[X1000_CLK_UART0] = {//16
 		"uart0", CGU_CLK_GATE,//
 		.parents = { X1000_CLK_EXCLK, -1, -1, -1 },//
 		.gate = { CGU_REG_CLKGR, 14 },//
 	},//
 
-	[X1000_CLK_UART1] = {//
+	[X1000_CLK_UART1] = {//17
 		"uart1", CGU_CLK_GATE,//
 		.parents = { X1000_CLK_EXCLK, -1, -1, -1 },//
 		.gate = { CGU_REG_CLKGR, 15 },//
 	},//
 
-	[X1000_CLK_UART2] = {//
+	[X1000_CLK_UART2] = {//18
 		"uart2", CGU_CLK_GATE,//
 		.parents = { X1000_CLK_EXCLK, -1, -1, -1 },//
 		.gate = { CGU_REG_CLKGR, 16 },//

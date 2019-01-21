@@ -31,6 +31,6 @@
 #define X1000_CLK_UART0		16
 #define X1000_CLK_UART1		17
 #define X1000_CLK_UART2		18
-#define X1000_CLK_PDMA		51
+#define X1000_CLK_PDMA		19
 
 #endif /* __DT_BINDINGS_CLOCK_X1000_CGU_H__ */
