@@ -1,0 +1,243 @@
+//#include <dt-bindings/interrupt-controller/x1000-irq.h>
+//#include <dt-bindings/clock/ingenic-tcu.h>
+
+/ {
+	#address-cells = <1>;
+	#size-cells = <1>;
+	compatible = "ingenic,x1000", "ingenic,x1500";
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu0: cpu@0 {
+			compatible = "ingenic,xburst";
+			device_type = "cpu";
+			reg = <0>;
+		};
+	};
+
+
+	cpuintc: interrupt-controller {
+		#address-cells = <0>;
+		#interrupt-cells = <1>;
+		interrupt-controller;
+		compatible = "mti,cpu-interrupt-controller";
+	};
+
+	intc: interrupt-controller@10001000 {
+		compatible = "ingenic,x1000-intc","ingenic,jz4780-intc";
+		reg = <0x10001000 0x50>;
+
+		interrupt-controller;
+		#interrupt-cells = <1>;
+
+		interrupt-parent = <&cpuintc>;
+		interrupts = <2>;
+	};
+
+	extclk: extclk {
+		compatible = "fixed-clock";
+		clock-output-names ="ext";
+		#clock-cells = <0>;
+	};
+
+	rtcclk: rtcclk {
+		compatible = "fixed-clock";
+		clock-output-names ="rtc";
+		#clock-cells = <0>;
+		clock-frequency = <32768>;
+	};
+
+	clock: clock-controller@0x10000000 {
+		compatible = "ingenic,x1000-clocks", "syscon";
+		reg = <0x10000000 0x100>;
+		clocks = <&extclk>, <&rtcclk>;
+		clock-names = "ext", "rtc";
+		#clock-cells = <1>;
+		little-endian;
+	};
+
+	ost: ost@0x12000000 {
+		compatible = "ingenic,x1000-ost";
+		reg = <0x12000000 0x30>;
+		interrupt-parent = <&cpuintc>;
+		interrupt-names = "sys_ost";
+		interrupts = <3>;
+	};
+/*
+	pinctrl: pin-controller@10010000 {
+		compatible = "ingenic,x1000-pinctrl";
+		reg = <0x10010000 0x700>;//??
+
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		gpa: gpio@0 {
+			compatible = "ingenic,x1000-gpio";
+			reg = <0>;
+
+			gpio-controller;
+			gpio-ranges = <&pinctrl 0 0 32>;
+			#gpio-cells = <2>;
+
+			interrupt-controller;
+			#interrupt-cells = <2>;
+
+			interrupt-parent = <&intc>;
+			interrupts = <17>;
+		};
+
+		gpb: gpio@1 {
+			compatible = "ingenic,x1000-gpio";
+			reg = <1>;
+
+			gpio-controller;
+			gpio-ranges = <&pinctrl 0 32 32>;
+			#gpio-cells = <2>;
+
+			interrupt-controller;
+			#interrupt-cells = <2>;
+
+			interrupt-parent = <&intc>;
+			interrupts = <16>;
+		};
+
+		gpc: gpio@2 {
+			compatible = "ingenic,x1000-gpio";
+			reg = <2>;
+
+			gpio-controller;
+			gpio-ranges = <&pinctrl 0 64 32>;
+			#gpio-cells = <2>;
+
+			interrupt-controller;
+			#interrupt-cells = <2>;
+
+			interrupt-parent = <&intc>;
+			interrupts = <15>;
+		};
+
+		gpd: gpio@3 {
+			compatible = "ingenic,x1000-gpio";
+			reg = <3>;
+
+			gpio-controller;
+			gpio-ranges = <&pinctrl 0 96 32>;
+			#gpio-cells = <2>;
+
+			interrupt-controller;
+			#interrupt-cells = <2>;
+
+			interrupt-parent = <&intc>;
+			interrupts = <14>;
+		};
+	};*/
+
+	pinctrl: pinctrl@0x10010000 {
+		compatible = "ingenic,x1000-pinctrl";
+		reg = <0x10010000 0x1000>;
+		ingenic,num-chips = <4>;
+		ingenic,regs-offset = <0x100>;
+
+		gpa: gpa {
+			gpio-controller;
+			#gpio-cells = <3>;
+			#ingenic,pincfg-cells = <3>;
+			#ingenic,pinmux-cells = <2>;
+			interrupts = <17>;
+			interrupt-parent = <&intc>;
+			interrupt-controller;
+			#interrupt-cells = <3>;
+			ingenic,num-gpios = <32>;
+			ingenic,pull-gpios = <0xffffffff>;
+		};
+
+		gpb: gpb {
+			gpio-controller;
+			#gpio-cells = <3>;
+			#ingenic,pincfg-cells = <3>;
+			#ingenic,pinmux-cells = <2>;
+			interrupts = <16>;
+			interrupt-parent = <&intc>;
+			interrupt-controller;
+			#interrupt-cells = <3>;
+			ingenic,num-gpios = <32>;
+			ingenic,pull-gpios = <0xffffffff>;
+		};
+
+		gpc: gpc {
+			gpio-controller;
+			#gpio-cells = <3>;
+			#ingenic,pincfg-cells = <3>;
+			#ingenic,pinmux-cells = <2>;
+			interrupts = <15>;
+			interrupt-parent = <&intc>;
+			interrupt-controller;
+			#interrupt-cells = <3>;
+			ingenic,num-gpios = <32>;
+			ingenic,pull-gpios = <0xfffffff>;
+		};
+
+		gpd: gpd {
+			gpio-controller;
+			#gpio-cells = <3>;
+			#ingenic,pincfg-cells = <3>;
+			#ingenic,pinmux-cells = <2>;
+			interrupts = <14>;
+			interrupt-parent = <&intc>;
+			interrupt-controller;
+			#interrupt-cells = <3>;
+			ingenic,num-gpios = <6>;
+			ingenic,pull-gpios = <0x3f>;
+		};
+	};
+
+	uart0: serial@0x10030000 {
+		compatible = "ingenic,8250-uart";
+		reg = <0x10030000 0x100>;
+		reg-shift = <2>;
+
+		interrupt-parent = <&intc>;
+		interrupts = <51>;
+
+		status = "disabled";
+	};
+
+	uart1: serial@0x10031000 {
+		compatible = "ingenic,8250-uart";
+		reg = <0x10031000 0x100>;
+		reg-shift = <2>;
+
+		interrupt-parent = <&intc>;
+		interrupts = <50>;
+
+		status = "disabled";
+	};
+/*
+	uart2: serial@10032000 {
+		compatible = "ingenic,x1000-uart";
+		reg = <0x10032000 0x100>;
+
+		interrupt-parent = <&intc>;
+		interrupts = <49>;
+
+		clocks = <&ext>, <&clock CLK_GATE_UART2>;
+		clock-names = "baud", "module";
+
+		status = "disabled";
+	};
+*/
+	uart2: serial@0x10032000 {
+		compatible = "ingenic,8250-uart";
+		reg = <0x10032000 0x100>;
+		reg-shift = <2>;
+
+		interrupt-parent = <&intc>;
+		interrupts = <49>;
+
+		status = "disabled";
+	};
+};
+
+#include "x1000-pinctrl.dtsi"

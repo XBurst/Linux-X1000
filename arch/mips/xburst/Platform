@@ -1,0 +1,2 @@
+platform-$(CONFIG_MACH_XBURST)	+= xburst/
+load-$(CONFIG_MACH_XBURST)	+= 0xffffffff80010000
