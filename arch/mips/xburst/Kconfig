@@ -1,0 +1,46 @@
+menuconfig SOC_TYPE
+	tristate "SOC type"
+	depends on MACH_XBURST
+	default y
+
+if SOC_TYPE
+choice
+	prompt "SOC types"
+	depends on MACH_XBURST
+	default SOC_X1000
+
+config SOC_X1000
+	bool "x1000 socs"
+	select CLK_X1000
+	select CLKSRC_OF
+	select PINCTRL
+	select CLKDEV_LOOKUP
+	select PINCTRL_INGENIC
+	select CLKSRC_INGENIC_SYS_OST
+	select MIPS_CPU_SCACHE
+	select SYS_HAS_CPU_MIPS32_R2
+	select SYS_SUPPORTS_HIGHMEM
+endchoice
+
+
+choice
+	prompt "device tree select"
+	default DT_NONE
+config DT_NONE
+
+if SOC_X1000
+source "arch/mips/xburst/soc-x1000/Kconfig.DT"
+endif
+endchoice
+
+config EXTAL_CLOCK
+	depends on MACH_XBURST
+	int "extal clock in MHz"
+	default 24
+
+config INGENIC_GPT_CHECK
+	depends on MACH_XBURST
+	bool "The physical space is larger than the virtual space"
+	default y
+
+endif

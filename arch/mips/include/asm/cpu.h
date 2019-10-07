@@ -171,10 +171,34 @@
 #define PRID_IMP_CAVIUM_CN70XX 0x9600
 
 /*
- * These are the PRID's for when 23:16 == PRID_COMP_INGENIC_*
+ * These are the PRID's for when 23:16 == PRID_COMP_INGENIC
+ * 31:24, Company Options is reserved;
+ * 23:16, Company ID is 0xd0;
+ * 15:8,  Processor ID;
+ *              -- 15:13, is the Generation of INGENIC's core.
+ *                              0x0 is XBurst1,
+ *                              0x1 is XBurst2,
+ *                              others are reserved.
+ *              -- 12:8, the encode of micro-architecture(uA).
+ *      7:0, Revision;
+ *              -- 7:4, the encode of process.
+ *                              0x0 is SMIC40LP,
+ *                              0x1 is TSMC40LP,
+ *                              others are reserved.
+ *              -- 3:0, the version of a chip's package or upgrades.
  */
+#define PRID_COMPANY_ID_MASK   0x00FF0000
+#define PRID_CPU_ARCH_MASK     0x00001F00
+#define PRID_CPU_FEATURE_MASK       0xFFFF0000
+#define PRID_CPU_CHIPS_MASK         0x000FF000
+#define PRID_IMP_PROCESSOR_ID_MSK 0x0000E000
+#define PRID_IMP_XBURST                         (0x0 << 13)
+#define PRID_CPU_ISA_MASK           0x00000FFF
 
-#define PRID_IMP_JZRISC	       0x0200
+#define PRID_IMP_JZRISC             0x00010000
+#define PRID_CPU_JZ4780             0x3ee00000
+#define PRID_CPU_X1000		    0x2ed10000
+#define PRID_IMP_ISA_R2             0x0000024f
 
 /*
  * These are the PRID's for when 23:16 == PRID_COMP_NETLOGIC

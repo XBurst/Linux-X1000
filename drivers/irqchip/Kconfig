@@ -172,7 +172,7 @@ config MIPS_GIC
 
 config INGENIC_IRQ
 	bool
-	depends on MACH_INGENIC
+	depends on MACH_XBURST
 	default y
 
 config RENESAS_H8300H_INTC

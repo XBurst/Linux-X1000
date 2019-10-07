@@ -1338,11 +1338,23 @@ static inline void cpu_probe_ingenic(struct cpuinfo_mips *c, unsigned int cpu)
 	/* JZRISC does not implement the CP0 counter. */
 	c->options &= ~MIPS_CPU_COUNTER;
 	BUG_ON(!__builtin_constant_p(cpu_has_counter) || cpu_has_counter);
-	switch (c->processor_id & PRID_IMP_MASK) {
-	case PRID_IMP_JZRISC:
+
+	switch (c->processor_id & PRID_IMP_PROCESSOR_ID_MSK) {
+	case PRID_IMP_XBURST:
+	{
+		unsigned int config7;
 		c->cputype = CPU_JZRISC;
 		c->writecombine = _CACHE_UNCACHED_ACCELERATED;
 		__cpu_name[cpu] = "Ingenic JZRISC";
+		/*
+		 * When CPU enters the long cycle, it will reduce the CPU speed to save power.
+		 * Set cp0 config7 bit 4 to disable this feature
+		 * This feature will cause bogoMips and loops_per_jiffy calculate in error
+		 */
+		config7 = read_c0_config7();
+		config7 |= (1 << 4);
+		write_c0_config7(config7);
+	}
 		break;
 	default:
 		panic("Unknown Ingenic Processor ID!");

@@ -52,6 +52,19 @@ void r4k_wait(void)
 	__r4k_wait();
 }
 
+void ingenic_wait_irqoff(void)
+{
+	local_irq_disable();
+	if (!need_resched())
+		__asm__(
+		"	.set	push		\n"
+		"	.set	arch=r4000	\n"
+		"	sync			\n"
+		"	wait			\n"
+		"	.set	pop		\n");
+	local_irq_enable();
+}
+
 /*
  * This variant is preferable as it allows testing need_resched and going to
  * sleep depending on the outcome atomically.  Unfortunately the "It is
@@ -175,11 +188,13 @@ void __init check_wait(void)
 	case CPU_CAVIUM_OCTEON_PLUS:
 	case CPU_CAVIUM_OCTEON2:
 	case CPU_CAVIUM_OCTEON3:
-	case CPU_JZRISC:
 	case CPU_LOONGSON1:
 	case CPU_XLR:
 	case CPU_XLP:
 		cpu_wait = r4k_wait;
+		break;
+	case CPU_JZRISC:
+		cpu_wait = ingenic_wait_irqoff;
 		break;
 	case CPU_BMIPS5000:
 		cpu_wait = r4k_wait_irqoff;

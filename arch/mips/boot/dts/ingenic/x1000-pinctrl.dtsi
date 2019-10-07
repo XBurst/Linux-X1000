@@ -1,0 +1,40 @@
+#include <dt-bindings/pinctrl/ingenic-pinctrl.h>
+
+&pinctrl {
+	uart0_pin: uart0-pin {
+		uart0_pc: uart0-pc {
+			ingenic,pinmux = <&gpc 10 11>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION0>;
+		};
+		uart0_pc_fc: uart0-pc-fc {	/*with flow control*/
+			ingenic,pinmux = <&gpc 10 13>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION0>;
+		};
+	};
+	uart1_pin: uart1-pin {
+		uart1_pa: uart2-pa {
+			ingenic,pinmux = <&gpa 4 5>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION2>;
+		};
+		uart1_pd: uart1-pd {
+			ingenic,pinmux = <&gpd 2 3>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION1>;
+		};
+	};
+
+	uart1_fc_pin: uart1-fc {	/*flow control*/
+		ingenic,pinmux = <&gpd 4 5>;
+		ingenic,pinmux-funcsel = <PINCTL_FUNCTION1>;
+	};
+
+	uart2_pin: uart2-pin {
+		uart2_pc: uart2-pc {
+			ingenic,pinmux = <&gpc 31 31>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION1>;
+		};
+		uart2_pd: uart2-pd {
+			ingenic,pinmux = <&gpd 4 5>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION0>;
+		};
+	};
+};
