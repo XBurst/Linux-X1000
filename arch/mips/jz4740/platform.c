@@ -30,7 +30,7 @@
 #include <linux/serial_core.h>
 #include <linux/serial_8250.h>
 
-#include "clock.h"
+//#include "clock.h"
 
 /* OHCI controller */
 static struct resource jz4740_usb_ohci_resources[] = {

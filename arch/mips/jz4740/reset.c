@@ -23,7 +23,7 @@
 #include <asm/mach-jz4740/timer.h>
 
 #include "reset.h"
-#include "clock.h"
+//#include "clock.h"
 
 static void jz4740_halt(void)
 {

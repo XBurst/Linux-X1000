@@ -14,6 +14,12 @@
  *
  */
 
+#include <linux/clk-provider.h>
+#include <linux/clocksource.h>
+
+
+
+
 #include <linux/init.h>
 #include <linux/io.h>
 #include <linux/irqchip.h>
@@ -58,6 +64,28 @@ void __init plat_mem_setup(void)
 {
 	int offset;
 
+	void __iomem *cpm_iobase = (void __iomem *)CKSEG1ADDR(0x10000000);
+
+	/* ingenic mips cpu special */
+	__asm__ (
+		"li    $2, 0xa9000000 \n\t"
+		"mtc0  $2, $5, 4      \n\t"
+		"nop                  \n\t"
+		::"r"(2));
+
+	set_io_port_base(IO_BASE);
+	/*Not have ioport*/
+	ioport_resource.start	= 0x00000000;
+	ioport_resource.end	= 0x00000000;
+	iomem_resource.start	= 0x10000000;
+	iomem_resource.end	= 0x1fffffff;
+
+	/*x1000 cpu special*/
+	writel( 0, cpm_iobase + 0x90);
+	writel(16, cpm_iobase + 0x94);
+	writel(24, cpm_iobase + 0x98);
+	writel( 8, cpm_iobase + 0x9c);
+
 	jz4740_reset_init();
 	__dt_setup_arch(__dtb_start);
 
@@ -80,6 +108,13 @@ static int __init populate_machine(void)
 	return 0;
 }
 arch_initcall(populate_machine);
+
+void __init plat_time_init(void)
+{
+	of_clk_init(NULL);
+
+	clocksource_probe();
+}
 
 const char *get_system_type(void)
 {

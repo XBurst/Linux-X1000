@@ -327,4 +327,8 @@ config CLKSRC_ST_LPC
 	  Enable this option to use the Low Power controller timer
 	  as clocksource.
 
+config CLKSRC_INGENIC_SYS_OST
+	bool
+	select CLKSRC_OF
+
 endmenu
