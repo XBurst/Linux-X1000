@@ -256,6 +256,12 @@ config PINCTRL_ZYNQ
 	help
 	  This selects the pinctrl driver for Xilinx Zynq.
 
+config PINCTRL_INGENIC
+	bool
+	select PINMUX
+	select PINCONF
+	select GENERIC_PINCONF
+
 source "drivers/pinctrl/aspeed/Kconfig"
 source "drivers/pinctrl/bcm/Kconfig"
 source "drivers/pinctrl/berlin/Kconfig"

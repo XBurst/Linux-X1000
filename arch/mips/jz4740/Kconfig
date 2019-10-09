@@ -1,7 +1,7 @@
 choice
 	prompt "Machine type"
 	depends on MACH_INGENIC
-	default JZ4740_QI_LB60
+	default X1000_CU_NEO
 
 config JZ4740_QI_LB60
 	bool "Qi Hardware Ben NanoNote"
@@ -11,6 +11,10 @@ config JZ4780_CI20
 	bool "MIPS Creator CI20"
 	select MACH_JZ4780
 
+config X1000_CU_NEO
+	bool "YSH & ATIL General Module CU Neo"
+	select MACH_X1000
+
 endchoice
 
 config MACH_JZ4740
@@ -19,6 +23,14 @@ config MACH_JZ4740
 
 config MACH_JZ4780
 	bool
+	select MIPS_CPU_SCACHE
+	select SYS_HAS_CPU_MIPS32_R2
+	select SYS_SUPPORTS_HIGHMEM
+
+config MACH_X1000
+	bool
+	select PINCTRL
+	select PINCTRL_INGENIC
 	select MIPS_CPU_SCACHE
 	select SYS_HAS_CPU_MIPS32_R2
 	select SYS_SUPPORTS_HIGHMEM

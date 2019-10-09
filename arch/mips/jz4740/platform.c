@@ -30,7 +30,7 @@
 #include <linux/serial_core.h>
 #include <linux/serial_8250.h>
 
-#include "clock.h"
+//#include "clock.h"
 
 /* USB Device Controller */
 struct platform_device jz4740_udc_xceiv_device = {
