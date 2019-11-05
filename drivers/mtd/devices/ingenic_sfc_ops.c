@@ -7,6 +7,7 @@
 #include <asm/uaccess.h>
 
 
+#include <soc/sfc.h>
 #include "sfc_params.h"
 #include "spi_nor.h"
 #include "ingenic_sfc_com.h"

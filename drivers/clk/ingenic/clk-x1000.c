@@ -17,6 +17,8 @@
 #include <linux/clk.h>
 #include <linux/of_address.h>
 #include <linux/mfd/syscon.h>
+#include <soc/cpm.h>
+
 #include <linux/module.h>
 
 #include "clk-comm.h"
@@ -24,25 +26,6 @@
 #include "clk-cpccr.h"
 #include "clk-cgu.h"
 #include "clk-gate.h"
-
-#define CPM_CPCCR      (0x00)
-
-#define CPM_DDRCDR     (0x2c)
-#define CPM_I2SCDR     (0x60)
-#define CPM_LPCDR      (0x64)
-#define CPM_MSC0CDR    (0x68)
-#define CPM_MSC1CDR    (0xa4)
-#define CPM_USBCDR     (0x50)
-#define CPM_MACCDR     (0x54)
-#define CPM_SFCCDR     (0x74)
-#define CPM_CIMCDR     (0x7c)
-#define CPM_PCMCDR     (0x84)
-
-#define CPM_CPAPCR     (0x10)
-#define CPM_CPMPCR     (0x14)
-
-#define CPM_CLKGR      (0x20)
-#define CPM_OPCR       (0x24)
 
 static const char *clk_name[NR_CLKS] = {
 	[CLK_EXT] = "ext",
@@ -464,7 +447,7 @@ void ingenic_gate_clk_associated_init(struct ingenic_clk_provide *ctx)
 		iclk = to_ingenic_clk(__clk_get_hw(clk));
 		hwdesc = iclk->hwdesc;
 		if (hwdesc->assoc_id >= CLK_ID_GATE &&
-				hwdesc->assoc_id < CLK_ID_GATE + CLK_NR_GATE)
+				hwdesc->assoc_id < CLK_ID_GATE + CLK_NR_GATE);
 			hwdesc->assoc_clk = ctx->data.clks[hwdesc->assoc_id];
 	}
 	return;

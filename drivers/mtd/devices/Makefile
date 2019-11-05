@@ -18,5 +18,6 @@ obj-$(CONFIG_MTD_BCM47XXSFLASH)	+= bcm47xxsflash.o
 obj-$(CONFIG_MTD_ST_SPI_FSM)    += st_spi_fsm.o
 obj-$(CONFIG_MTD_POWERNV_FLASH)	+= powernv_flash.o
 obj-$(CONFIG_MTD_INGENIC_SFC_NORFLASH)	+= ingenic_sfc_com.o ingenic_sfc_nor.o ingenic_sfc_ops.o
+obj-$(CONFIG_MTD_INGENIC_SFC_NANDFLASH)	+= ingenic_sfc_com.o ingenic_sfc_nand.o nand_device/
 
 CFLAGS_docg3.o			+= -I$(src)

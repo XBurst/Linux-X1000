@@ -157,6 +157,15 @@ config VIDEO_MEM2MEM_DEINTERLACE
 	help
 	    Generic deinterlacing V4L2 driver.
 
+config VIDEO_INGENIC_JPEG
+        depends on VIDEO_DEV && VIDEO_V4L2
+		depends on SOC_X1000
+	tristate "Ingenic JPEG codec driver"
+	select VIDEOBUF2_DMA_CONTIG
+	select V4L2_MEM2MEM_DEV
+	---help---
+	  This is a v4l2 driver for Ingenic X1000 codec
+
 config VIDEO_SAMSUNG_S5P_G2D
 	tristate "Samsung S5P and EXYNOS4 G2D 2d graphics accelerator driver"
 	depends on VIDEO_DEV && VIDEO_V4L2
