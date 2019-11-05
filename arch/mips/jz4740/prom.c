@@ -47,7 +47,7 @@ static __init void jz4740_init_cmdline(int argc, char *argv[])
 void __init prom_init(void)
 {
 	jz4740_init_cmdline((int)fw_arg0, (char **)fw_arg1);
-	mips_machtype = MACH_INGENIC_JZ4740;
+	mips_machtype = MACH_INGENIC_X1000;
 }
 
 void __init prom_free_prom_memory(void)
