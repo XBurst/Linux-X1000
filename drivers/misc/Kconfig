@@ -496,6 +496,14 @@ config USB_SWITCH_FSA9480
 	  stereo and mono audio, video, microphone and UART data to use
 	  a common connector port.
 
+config BCM_43438_RFKILL
+	tristate "Bluetooth power control driver for BCM-43438 module"
+	depends on RFKILL
+	default n
+	---help---
+	Creates an rfkill entry in sysfs for power control of Bluetooth
+	bcm-xxxx chips.
+
 config LATTICE_ECP3_CONFIG
 	tristate "Lattice ECP3 FPGA bitstream configuration via SPI"
 	depends on SPI && SYSFS

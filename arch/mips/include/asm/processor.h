@@ -82,6 +82,12 @@ extern unsigned int vced_count, vcei_count;
  */
 #define TASK_UNMAPPED_BASE PAGE_ALIGN(TASK_SIZE / 3)
 
+#ifdef CONFIG_MACH_XBURST
+#define NUM_MXU_REGS    16
+struct xburst_mxu_struct {
+        unsigned int regs[NUM_MXU_REGS];
+};
+#endif
 
 #define NUM_FPU_REGS	32
 
@@ -261,6 +267,11 @@ struct thread_struct {
 
 	/* Saved state of the DSP ASE, if available. */
 	struct mips_dsp_state dsp;
+
+#ifdef CONFIG_MACH_XBURST
+	/* Saved registers of the MXU, if available. */
+	struct xburst_mxu_struct mxu;
+#endif
 
 	/* Saved watch register state, if available. */
 	union mips_watch_reg_state watch;

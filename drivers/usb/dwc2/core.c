@@ -835,6 +835,8 @@ int dwc2_core_init(struct dwc2_hsotg *hsotg, bool select_phy, int irq)
 	if (dwc2_is_host_mode(hsotg)) {
 		dev_dbg(hsotg->dev, "Host Mode\n");
 		hsotg->op_state = OTG_STATE_A_HOST;
+		otgctl |= GOTGCTL_VBVALIDOVEN | GOTGCTL_VBVALIDOVVAL;
+		dwc2_writel(otgctl, hsotg->regs + GOTGCTL);
 	} else {
 		dev_dbg(hsotg->dev, "Device Mode\n");
 		hsotg->op_state = OTG_STATE_B_PERIPHERAL;
@@ -1029,6 +1031,7 @@ void dwc2_core_host_init(struct dwc2_hsotg *hsotg)
 
 	/* Initialize Host Configuration Register */
 	dwc2_init_fs_ls_pclk_sel(hsotg);
+
 	if (hsotg->core_params->speed == DWC2_SPEED_PARAM_FULL) {
 		hcfg = dwc2_readl(hsotg->regs + HCFG);
 		hcfg |= HCFG_FSLSSUPP;
@@ -1131,6 +1134,7 @@ void dwc2_core_host_init(struct dwc2_hsotg *hsotg)
 			hprt0 |= HPRT0_PWR;
 			dwc2_writel(hprt0, hsotg->regs + HPRT0);
 		}
+		usb_phy_vbus_on(hsotg->uphy);
 	}
 
 	dwc2_enable_host_interrupts(hsotg);
@@ -2172,6 +2176,10 @@ void dwc2_dump_host_registers(struct dwc2_hsotg *hsotg)
 	u32 __iomem *addr;
 	int i;
 
+	if (!(dwc2_readl(hsotg->regs + GINTSTS) & GINTSTS_CURMODE_HOST)) {
+		dev_dbg(hsotg->dev, "%s but current mode is device\n", __func__);
+		return;
+	}
 	dev_dbg(hsotg->dev, "Host Global Registers\n");
 	addr = hsotg->regs + HCFG;
 	dev_dbg(hsotg->dev, "HCFG	 @0x%08lX : 0x%08X\n",

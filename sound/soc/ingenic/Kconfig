@@ -1,0 +1,64 @@
+menuconfig SND_ASOC_INGENIC
+	tristate "ASoC support for Ingenic"
+	depends on MACH_XBURST && SND_SOC
+	help
+		Say 'Y' to enable Alsa drivers of xburst.
+
+if SND_ASOC_INGENIC
+
+config SND_ASOC_INGENIC_X1000_BOARD
+	tristate
+
+config SND_ASOC_INGENIC_AIC
+	tristate
+
+config SND_ASOC_PDMA
+	tristate
+	select DMADEVICES
+	select INGENIC_PDMAC
+	select SND_SOC_GENERIC_DMAENGINE_PCM
+
+config SND_ASOC_INGENIC_AIC_SPDIF
+	tristate
+	select SND_ASOC_INGENIC_AIC
+
+config SND_ASOC_INGENIC_AIC_I2S
+	tristate
+	select SND_ASOC_INGENIC_AIC
+
+config SND_ASOC_INGENIC_DMIC
+	tristate
+
+config SND_ASOC_INGENIC_ICDC_D3
+	tristate
+	select SND_ASOC_INGENIC_AIC
+	select SND_ASOC_INGENIC_INCODEC
+
+config SND_ASOC_INGENIC_DUMP_CODEC
+	tristate
+
+menu "ingenic board type select"
+choice
+	prompt "soc x1000 codec type select"
+	depends on SOC_X1000
+config SND_ASOC_INGENIC_HALLEY2_ICDC
+	tristate "Audio support for halley2 with internal codec"
+	select SND_ASOC_PDMA
+	select SND_ASOC_INGENIC_AIC_I2S
+	select SND_ASOC_INGENIC_ICDC_D3
+	select SND_ASOC_INGENIC_DMIC
+	select SND_ASOC_INGENIC_DUMP_CODEC
+	select SND_ASOC_INGENIC_X1000_BOARD
+
+config SND_ASOC_INGENIC_HALLEY2_SPDIF
+	tristate "Audio support for halley2 with spdif"
+	select SND_ASOC_PDMA
+	select SND_ASOC_INGENIC_DMIC
+	select SND_ASOC_INGENIC_DUMP_CODEC
+	select SND_ASOC_INGENIC_X1000_BOARD
+	select SND_ASOC_INGENIC_AIC_SPDIF
+endchoice
+
+endmenu
+
+endif

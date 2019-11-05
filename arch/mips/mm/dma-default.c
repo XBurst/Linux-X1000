@@ -273,8 +273,22 @@ static inline void __dma_sync(struct page *page,
 				if (offset >= PAGE_SIZE) {
 					page += offset >> PAGE_SHIFT;
 					offset &= ~PAGE_MASK;
+#ifdef CONFIG_DMA_INGENIC_HIGHMEM_FLUSH
+					/**
+					 * Explain：
+					 * When offset + len is less than PAGE_SIZE,
+					 * only need to flush the length of len;
+					 * Rather than flush PAGE_SIZE
+					 */
+					len = PAGE_SIZE - offset;
+					len = min(left, len);
+				} else {
+					len = PAGE_SIZE - offset;
+				}
+#else
 				}
 				len = PAGE_SIZE - offset;
+#endif
 			}
 
 			addr = kmap_atomic(page);

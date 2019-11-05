@@ -60,3 +60,4 @@ obj-$(CONFIG_BRCMSMAC)	+= brcm80211/
 
 obj-$(CONFIG_CW1200)	+= cw1200/
 obj-$(CONFIG_RSI_91X)	+= rsi/
+obj-$(CONFIG_BCMDHD_1_363_59_144)   += bcmdhd_1_363_59_144/

@@ -1,0 +1,51 @@
+config INGENIC_MAC
+	tristate "ingenic on-chip MAC support"
+	select CRC32
+	select RMII
+	select MII
+	help
+	  This is the driver for INGENIC on-chip mac device.
+
+config INGENIC_MAC_MODE
+	tristate "ingenic on-chip MAC support mode"
+	depends on INGENIC_MAC
+	select CRC32
+	select RMII
+	select PHYLIB
+	select PHY_RESET
+	help
+	  This is the driver for INGENIC on-chip mac support mode device.
+
+choice
+	prompt "INGENIC SOC MAC mode"
+	depends on INGENIC_MAC_MODE
+	default CONFIG_INGENIC_MAC_MII
+
+config INGENIC_MAC_MII
+	bool "MII"
+	help
+	  Select Media Independent Interface
+
+config INGENIC_MAC_GMII
+	bool "GMII"
+	help
+	  Select Gigabit Media Independent Interface
+
+config INGENIC_MAC_RMII
+	bool "RMII"
+	help
+	  Select Reduced Media Independent Interface
+
+config INGENIC_MAC_RGMII
+	bool "RGMII"
+	help
+	  Select Reduced Gigabit Media Independent Interface
+endchoice
+
+config INGENIC_GPIO_PHY_RESET
+    bool "PHY_RESET"
+	depends on INGENIC_MAC
+	help
+	  This is the gpio for phy reset for ingenic net
+	  if there is no special porpose
+	  do open this item

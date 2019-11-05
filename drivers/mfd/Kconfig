@@ -414,6 +414,15 @@ config MFD_JZ4740_ADC
 	  Say yes here if you want support for the ADC unit in the JZ4740 SoC.
 	  This driver is necessary for jz4740-battery and jz4740-hwmon driver.
 
+config MFD_INGENIC_TCU
+	bool "Ingenic tcu driver"
+	select MFD_CORE
+	select GENERIC_IRQ_CHIP
+	depends on MACH_XBURST
+	help
+	  Say yes here if you want support for the TCU unit in the ingenic SoC.
+	  This driver is necessary for ingenic pwm or counter.
+
 config MFD_KEMPLD
 	tristate "Kontron module PLD device"
 	select MFD_CORE
