@@ -29,6 +29,9 @@
 
 #include "reset.h"
 
+#include <linux/clk-provider.h>
+#include <linux/clocksource.h>
+
 
 #define JZ4740_EMC_SDRAM_CTRL 0x80
 
@@ -80,6 +83,13 @@ static int __init populate_machine(void)
 	return 0;
 }
 arch_initcall(populate_machine);
+
+void __init plat_time_init(void)
+{
+       of_clk_init(NULL);
+
+       clocksource_probe();
+}
 
 const char *get_system_type(void)
 {
