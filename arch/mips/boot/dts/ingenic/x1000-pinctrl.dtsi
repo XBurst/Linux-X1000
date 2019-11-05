@@ -1,0 +1,26 @@
+#include <dt-bindings/pinctrl/ingenic-pinctrl.h>
+
+&pinctrl {
+	uart2_pin: uart2-pin {
+		uart2_pc: uart2-pc {
+			ingenic,pinmux = <&gpc 31 31>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION1>;
+		};
+		uart2_pd: uart2-pd {
+			ingenic,pinmux = <&gpd 4 5>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION0>;
+		};
+	};
+
+	rtc32k_pins:rtc32k-pins {
+		rtc32k_enable:rtc32k-enable {
+			ingenic,pinmux = <&gpb 26 26>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION0>;
+		};
+		rtc32k_disable:rtc32k-disable {
+			ingenic,pinmux = <&gpb 26 26>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTIONS>;
+		};
+	};
+
+};

@@ -22,3 +22,17 @@ config MACH_JZ4780
 	select MIPS_CPU_SCACHE
 	select SYS_HAS_CPU_MIPS32_R2
 	select SYS_SUPPORTS_HIGHMEM
+
+config MACH_X1000
+	bool
+	select PINCTRL
+	select PINCTRL_INGENIC
+	select CLKSRC_INGENIC_SYS_OST
+	select MIPS_CPU_SCACHE
+	select SYS_HAS_CPU_MIPS32_R2
+	select SYS_SUPPORTS_HIGHMEM
+
+config EXTAL_CLOCK
+	depends on MACH_INGENIC
+	int "extal clock in MHz"
+	default 24
