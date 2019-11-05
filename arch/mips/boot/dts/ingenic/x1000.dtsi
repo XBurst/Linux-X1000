@@ -164,6 +164,22 @@
 			};
 		};
 	};
+
+	ahb2 {
+		compatible = "simple-bus";
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges = <>;
+
+		sfc: sfc@0x13440000 {
+			compatible = "ingenic,sfc";
+			reg = <0x13440000 0x10000>;
+			interrupt-parent = <&intc>;
+			interrupts = <7>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&sfc_pa>;
+		};
+	};
 };
 
 #include "x1000-pinctrl.dtsi"

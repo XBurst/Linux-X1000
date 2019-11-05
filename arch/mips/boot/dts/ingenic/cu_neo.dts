@@ -30,3 +30,9 @@
 	status = "okay";
 	pinctrl-0 = <&uart2_pd>;
 };
+
+&sfc {
+	status = "okay";
+	ingenic,sfc-max-frequency = <150000000>;
+	ingenic,quad_mode      = <1>;
+};

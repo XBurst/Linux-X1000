@@ -12,6 +12,13 @@
 		};
 	};
 
+	sfc_pin: sfc-pin {
+		sfc_pa: sfc-pa {
+			ingenic,pinmux = <&gpa 26 31>;
+			ingenic,pinmux-funcsel = <PINCTL_FUNCTION1>;
+		};
+	};
+
 	rtc32k_pins:rtc32k-pins {
 		rtc32k_enable:rtc32k-enable {
 			ingenic,pinmux = <&gpb 26 26>;

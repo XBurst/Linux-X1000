@@ -233,4 +233,25 @@ config BCH_CONST_T
 	default 4
 endif
 
+config INGENIC_SFC
+	tristate "Ingenic series SFC driver"
+	depends on MACH_INGENIC
+	help
+		SFC driver for Ingenic series SoCs
+
+if INGENIC_SFC
+
+choice
+	prompt "the SFC external memory (nor or nand)"
+	help
+	  Select the SFC external memory
+
+config MTD_INGENIC_SFC_NORFLASH
+	bool "Support ingenic sfc-nor"
+	depends on INGENIC_SFC
+
+endchoice
+
+endif
+
 endmenu
