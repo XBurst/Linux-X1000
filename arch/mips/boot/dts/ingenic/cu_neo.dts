@@ -31,6 +31,13 @@
 	pinctrl-0 = <&uart2_pd>;
 };
 
+&mac {
+	pinctrl-names = "default", "reset";
+	status = "okay";
+	ingenic,rst-gpio = <&gpb 3 GPIO_ACTIVE_LOW INGENIC_GPIO_NOBIAS>;
+	ingenic,rst-ms = <10>;
+};
+
 &sfc {
 	status = "okay";
 	ingenic,sfc-max-frequency = <150000000>;

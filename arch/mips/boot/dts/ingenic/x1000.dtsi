@@ -171,6 +171,17 @@
 		#size-cells = <1>;
 		ranges = <>;
 
+		mac: mac@0x134b0000 {
+			compatible = "ingenic,dwc-mac";
+			reg = <0x134b0000 0x2000>;
+			interrupt-parent = <&intc>;
+			interrupts = <55>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&mac_rmii>;
+			status = "disabled";
+			ingenic,rst-ms = <10>;
+		};
+
 		sfc: sfc@0x13440000 {
 			compatible = "ingenic,sfc";
 			reg = <0x13440000 0x10000>;

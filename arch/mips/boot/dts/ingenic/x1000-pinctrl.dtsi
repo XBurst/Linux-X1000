@@ -12,6 +12,11 @@
 		};
 	};
 
+	mac_rmii: mac-rmii {
+		ingenic,pinmux = <&gpb 7 15>;
+		ingenic,pinmux-funcsel = <PINCTL_FUNCTION1>;
+	};
+
 	sfc_pin: sfc-pin {
 		sfc_pa: sfc-pa {
 			ingenic,pinmux = <&gpa 26 31>;
