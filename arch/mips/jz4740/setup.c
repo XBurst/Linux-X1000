@@ -75,6 +75,8 @@ void __init device_tree_init(void)
 
 const char *get_system_type(void)
 {
+	if (IS_ENABLED(CONFIG_MACH_X1000))
+		return "X1000";
 	if (IS_ENABLED(CONFIG_MACH_JZ4780))
 		return "JZ4780";
 
