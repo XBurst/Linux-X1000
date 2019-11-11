@@ -16,6 +16,7 @@
 #include <asm/mmu_context.h>
 #include <asm/r4kcache.h>
 #include <asm/mips-cps.h>
+#include <asm/bootinfo.h>
 
 /*
  * MIPS32/MIPS64 L2 cache handling
@@ -214,11 +215,27 @@ static inline int __init mips_sc_probe(void)
 	else
 		return 0;
 
+	/*
+	 * According to config2 it would be 512-sets, but that is contradicted
+	 * by all documentation.
+	 */
+	if (current_cpu_type() == CPU_XBURST &&
+				mips_machtype == MACH_INGENIC_X1000)
+		c->scache.sets = 256;
+
 	tmp = (config2 >> 0) & 0x0f;
 	if (tmp <= 7)
 		c->scache.ways = tmp + 1;
 	else
 		return 0;
+
+	/*
+	 * According to config2 it would be 5-ways, but that is contradicted
+	 * by all documentation.
+	 */
+	if (current_cpu_type() == CPU_XBURST &&
+				mips_machtype == MACH_INGENIC_X1000)
+		c->scache.ways = 4;
 
 	c->scache.waysize = c->scache.sets * c->scache.linesz;
 	c->scache.waybit = __ffs(c->scache.waysize);
